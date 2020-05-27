@@ -48,7 +48,6 @@ public:
 		return  this->next != nullptr;
 	}
 	
-
 	T getValue()
 	{
 		return  value;
@@ -67,10 +66,6 @@ class LinkedList
 
 public:
 	
-	/// <summary>
-	/// Adds the specified node at the back of the list;
-	/// </summary>
-	/// <param name="node">The node.</param>
 	void add(Node<T>* node)
 	{
 
@@ -83,19 +78,11 @@ public:
 			}
 		}
 		list.push_back(node);
-		
 	}
 
 	
-	/// <summary>
-	/// Adds a node after a particular node.
-	/// </summary>
-	/// <param name="node">The node.</param>
-	/// <param name="prev">The previous.</param>
-	/// <returns>returns true if next node was found and placed after it, otherwise returns false</returns>
 	bool add_after(Node<T>* node, Node<T>* prev)
 	{
-		
 		auto result = std::find(list.begin(), list.end(), prev);
 		if (result!=list.end())
 		{
@@ -109,13 +96,6 @@ public:
 		return false;
 	}
 	
-
-	/// <summary>
-	/// Adds a Node before a particular node
-	/// </summary>
-	/// <param name="node">The node.</param>
-	/// <param name="next">The next.</param>
-	/// <returns>true if success, otherwise if previous node was not found returns false</returns>
 	bool add_before(Node<T>* node, Node<T>* next)
 	{
 		auto result = std::find(list.begin(), list.end(), next);
@@ -127,10 +107,8 @@ public:
 			list.insert(result, node);
 			return true;
 		}
-
 		return false; 
 	}
-
 
 	std::vector<Node<T>*> getList() const
 	{
@@ -138,49 +116,35 @@ public:
 	}
 	
 private:
-
 	std::vector<Node<T>*> list;
-
-	
 };
 
 
 int main() 
 {
-
 	Node<int> one(1);
 	Node<int> two(2);
+	Node<int> three(3);
+	Node<int> four(4);
 	Node<int> five(5);
 
 	LinkedList<int> list;
 	list.add(&one);
 	list.add(&two);
 	list.add(&five);
-
-	Node<int> three(3);
 	list.add_after(&three, &two);
-
-	Node<int> four(4);
 	list.add_before(&four, &five);
 	
-
 	for (Node<int>* n : list.getList())
 	{
-
 		std::cout << "My value = " << n->getValue();
 		if (n->hasPrev())
 			std::cout << " and I come after " << n->getPrev()->getValue();
 		if (n->hasNext())
 			std::cout << " and I come before " << n->getNext()->getValue();
-
 		std::cout << std::endl;
 	}
-
-
-	
-	
 	system("pause");
-
 }
 
 
